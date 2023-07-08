@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:42:33 by ligabrie          #+#    #+#             */
-/*   Updated: 2023/07/08 19:29:26 by admin            ###   ########.fr       */
+/*   Updated: 2023/07/08 19:43:12 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ extern int		ft_lstsize(t_list *lst);
 
 extern char		*get_next_line(int fd);
 extern int		check_buff(char *s_buff);
-extern long int	ft_strlen(char *s);
 extern char		*str_join(char *s0, char *s1);
 extern char		*read_to_buff(int fd, char *s_buff);
 extern char		*extract_next(char *s_buff);

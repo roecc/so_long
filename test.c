@@ -1,4 +1,4 @@
-#include "dolphinstein.h"
+#include "so_long.h"
 
 static mlx_image_t* image;
 static mlx_image_t* dolph_img0;
@@ -30,15 +30,14 @@ void ft_hook(void* param)
 
 void	ft_move(mlx_t *mlx, mlx_image_t *dolph)
 {
-	//dolph->instances[0].x += x;
-	//dolph->instances[0].y += y;
+	int	dist = 64;
 
 	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
 	{
 		if (pressed != 1)
 		{
 			pressed = 1;
-			dolph->instances[0].y += 128;
+			dolph->instances[0].y += dist;
 		}
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_UP))
@@ -46,7 +45,7 @@ void	ft_move(mlx_t *mlx, mlx_image_t *dolph)
 		if (pressed != 1)
 		{
 			pressed = 1;
-			dolph->instances[0].y -= 128;
+			dolph->instances[0].y -= dist;
 		}
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
@@ -54,7 +53,7 @@ void	ft_move(mlx_t *mlx, mlx_image_t *dolph)
 		if (pressed != 1)
 		{
 			pressed = 1;
-			dolph->instances[0].x -= 128;
+			dolph->instances[0].x -= dist;
 		}
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
@@ -62,7 +61,7 @@ void	ft_move(mlx_t *mlx, mlx_image_t *dolph)
 		if (pressed != 1)
 		{
 			pressed = 1;
-			dolph->instances[0].x += 128;
+			dolph->instances[0].x += dist;
 		}
 	}
 	else if (pressed)
@@ -105,16 +104,14 @@ void ft_animate(void* param)
 int32_t main(int32_t argc, const char* argv[])
 {
 	mlx_t			*mlx;
-	//mlx_image_t		*img;
-	//int	i = -1;
-	//int	j = -1;
+
 	(void)argc;
 	(void)argv;
 
 	mlx_set_setting(MLX_MAXIMIZED, true);
 
 	// Gotta error check this stuff
-	if (!(mlx = mlx_init(WIDTH, HEIGHT, "SO_LONG", true)))
+	if (!(mlx = mlx_init(WIDTH, HEIGHT, "Dolphinstein 2D", true)))
 		ft_error();
 	if (!(image = mlx_new_image(mlx, 128, 128)))
 	{
@@ -131,9 +128,6 @@ int32_t main(int32_t argc, const char* argv[])
 	mlx_texture_t* dolph_tex0 = mlx_load_png("./assets/dolph.png");
 	if (!dolph_tex0)
 		ft_error();
-	/* mlx_texture_t* dolph1_tex = mlx_load_png("./assets/dolph0.png");
-	if (!dolph1_tex)
-		ft_error(); */
 	dolph_img0 = mlx_texture_to_image(mlx, dolph_tex0);
 	if (!dolph_img0)
 		ft_error();
@@ -143,19 +137,16 @@ int32_t main(int32_t argc, const char* argv[])
 	mlx_texture_t* dolph_tex1 = mlx_load_png("./assets/dolph0.png");
 	if (!dolph_tex1)
 		ft_error();
-	/* mlx_texture_t* dolph1_tex = mlx_load_png("./assets/dolph0.png");
-	if (!dolph1_tex)
-		ft_error(); */
 	dolph_img1 = mlx_texture_to_image(mlx, dolph_tex1);
 	if (!dolph_img1)
 		ft_error();
 	if (mlx_image_to_window(mlx, dolph_img1, -256, -256) < 0)
 		ft_error();
 
-	//mlx_loop_hook(mlx, ft_randomize, mlx);
 	mlx_loop_hook(mlx, ft_hook, mlx);
 	mlx_loop_hook(mlx, ft_animate, mlx);
 
+	read_map(mlx, dolph_img0);
 	
 	mlx_loop(mlx);
 	mlx_terminate(mlx);

@@ -28,18 +28,6 @@ int	check_buff(char *s_buff)
 	return (-1);
 }
 
-long int	ft_strlen(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-}
-
 char	*str_join(char *s0, char *s1)
 {
 	char	*tmp;

@@ -1,4 +1,4 @@
-NAME = Dolphinstein
+NAME = so_long
 
 SOURCES = \
 test.c \
