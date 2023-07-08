@@ -20,78 +20,12 @@ void ft_error(void)
 	exit(EXIT_FAILURE);
 }
 
-/* void ft_randomize(void* param)
-{
-	(void)param;
-	for (int i = 0; i < image->width; ++i)
-	{
-		for (int y = 0; y < image->height; ++y)
-		{
-			int color = get_rgba(
-				rand() % 0x11, // R
-				rand() % 0x11, // G
-				rand() % 0x11, // B
-				rand() % 0xff  // A
-			);
-			mlx_put_pixel(image, i, y, color);
-		}
-	}
-} */
-
 void ft_hook(void* param)
 {
 	mlx_t* mlx = param;
 
-	/* if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-		image->instances[0].y -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		image->instances[0].y += 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		image->instances[0].x -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		image->instances[0].x += 5; */
-
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
-
-/* 
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-	{
-		if (pressed != 1)
-		{
-			pressed = 1;
-			image->instances[0].y += 128;
-		}
-	}
-	else if (mlx_is_key_down(mlx, MLX_KEY_UP))
-	{
-		if (pressed != 1)
-		{
-			pressed = 1;
-			image->instances[0].y -= 128;
-		}
-	}
-	else if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-	{
-		if (pressed != 1)
-		{
-			pressed = 1;
-			image->instances[0].x -= 128;
-		}
-	}
-	else if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-	{
-		if (pressed != 1)
-		{
-			pressed = 1;
-			image->instances[0].x += 128;
-		}
-	}
-	else if (pressed)
-		pressed = 0; */
-	//printf("WIDTH: %d | HEIGHT: %d\n", mlx->width, mlx->height);
 }
 
 void	ft_move(mlx_t *mlx, mlx_image_t *dolph)

@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:42:33 by ligabrie          #+#    #+#             */
-/*   Updated: 2023/07/08 18:41:34 by admin            ###   ########.fr       */
+/*   Updated: 2023/07/08 19:29:26 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <string.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <stdarg.h>
 
 typedef struct s_list
 {
@@ -80,5 +81,14 @@ extern char		*str_join(char *s0, char *s1);
 extern char		*read_to_buff(int fd, char *s_buff);
 extern char		*extract_next(char *s_buff);
 extern char		*cut_buff(char *s_buff, char *next);
+
+
+extern int	ft_printf(const char *cs, ...);
+extern int	ft_putchar(char c, int fd);
+extern int	ft_putstr(char *s, int fd);
+extern int	ft_putnbr(int n, int fd);
+extern int	ft_putui(unsigned int n, int fd);
+extern int	ft_put_hex(size_t nbr, char	*digits);
+extern int	ft_put_ptr(size_t ptr);
 
 #endif
