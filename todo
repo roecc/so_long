@@ -1,0 +1,11 @@
+-map reader
+	-check for borders
+	-check for singular start exit and pickup
+	-define tiles
+-player movement
+	-turn based
+	//-attempt collision
+-env
+	-define wall
+	-define floor
+-grab clean get next line
