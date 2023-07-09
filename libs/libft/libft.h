@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:42:33 by ligabrie          #+#    #+#             */
-/*   Updated: 2023/07/08 19:43:12 by admin            ###   ########.fr       */
+/*   Updated: 2023/07/09 12:55:03 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ extern char		**ft_split(char const *s, char c);
 extern char		*ft_strchr(char *s, int c);
 extern char		*ft_strdup(const char *s1);
 extern void		ft_striteri(char *s, void (*f)(unsigned int, char*));
-extern char		*ft_strjoin(char const *s1, char const *s2);
+extern char		*ft_strjoin(char *s1, char *s2);
 extern size_t	ft_strlcat(char *dst, const char *src, size_t size);
 extern size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 extern long int	ft_strlen(char *s);

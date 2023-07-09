@@ -1,15 +1,20 @@
 #include "so_long.h"
 
-void	read_map(mlx_t *mlx, mlx_image_t *dolph)
+char	*read_map(mlx_t *mlx, mlx_image_t *dolph)
 {
 	int		fd;
 	char	*line;
+	char	*map;
 	int		len;
 	int		tex_size;
 
 	int	x;
 	int	y;
-
+	
+	map = (char *)malloc(sizeof(char) * 1);
+	if (!map)
+		return(NULL);
+	map[0] = '\0';
 	mlx_texture_t*  wall_tex = mlx_load_png("./assets/wall.png");
 	if (!wall_tex)
 		ft_error();
@@ -24,7 +29,7 @@ void	read_map(mlx_t *mlx, mlx_image_t *dolph)
 	if (!fish)
 		ft_error();
 
-	fd = open("map1.ber", O_RDONLY);
+	fd = open("map0.ber", O_RDONLY);
 	/* line = get_next_line(fd);
 	ft_printf("%s", line);
 	len = ft_strlen(line); */
@@ -38,7 +43,7 @@ void	read_map(mlx_t *mlx, mlx_image_t *dolph)
 		if(len == -1)
 			len = ft_strlen(line);
 		ft_printf("%s", line);
-		if (ft_strlen(line) != len && line)
+		if (ft_strlen(line) != len)
 			ft_printf("\nERROR\n");
 		x = -1;
 		while (line[++x])
@@ -56,8 +61,14 @@ void	read_map(mlx_t *mlx, mlx_image_t *dolph)
 			}
 		}
 		y++;
+
+		if (!(map = str_join(map, line)))
+			return(NULL);
 	}
+	//ft_printf("\n");
+	ft_printf("%s", map);
 	ft_printf("\n");
+	return(map);
 }
 
 int	check_map(char *map)

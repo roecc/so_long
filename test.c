@@ -4,6 +4,8 @@ static mlx_image_t* image;
 static mlx_image_t* dolph_img0;
 static mlx_image_t* dolph_img1;
 int pressed;
+char	*map;
+//t_vect	*dolph_loc;
 
 // -----------------------------------------------------------------------------
 
@@ -31,13 +33,27 @@ void ft_hook(void* param)
 void	ft_move(mlx_t *mlx, mlx_image_t *dolph)
 {
 	int	dist = 64;
+	//t_vect	*pos;
+	//lst = (t_list *)malloc(sizeof(t_list));
+	int	pos[2];
+	int	len;
+
+	len = 14;
+
+	pos[0] = dolph->instances[0].x / dist;
+	pos[1] = dolph->instances[0].y / dist;
+
+	//printf("\nx: %d, y: %d", pos[0], pos[1]);
 
 	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
 	{
 		if (pressed != 1)
 		{
 			pressed = 1;
-			dolph->instances[0].y += dist;
+			if (map[pos[0] + (pos[1] + 1) * len] != '1')
+				dolph->instances[0].y += dist;
+			else
+				ft_printf("\nWALL\n");
 		}
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_UP))
@@ -45,7 +61,10 @@ void	ft_move(mlx_t *mlx, mlx_image_t *dolph)
 		if (pressed != 1)
 		{
 			pressed = 1;
-			dolph->instances[0].y -= dist;
+			if (map[pos[0] + (pos[1] - 1) * len] != '1')
+				dolph->instances[0].y -= dist;
+			else
+				ft_printf("\nWALL\n");
 		}
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
@@ -53,7 +72,10 @@ void	ft_move(mlx_t *mlx, mlx_image_t *dolph)
 		if (pressed != 1)
 		{
 			pressed = 1;
-			dolph->instances[0].x -= dist;
+			if (map[pos[0] - 1 + (pos[1]) * len] != '1')
+				dolph->instances[0].x -= dist;
+			else
+				ft_printf("\nWALL\n");
 		}
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
@@ -61,7 +83,10 @@ void	ft_move(mlx_t *mlx, mlx_image_t *dolph)
 		if (pressed != 1)
 		{
 			pressed = 1;
-			dolph->instances[0].x += dist;
+			if (map[pos[0] + 1 + (pos[1]) * len] != '1')
+				dolph->instances[0].x += dist;
+			else
+				ft_printf("\nWALL");
 		}
 	}
 	else if (pressed)
@@ -108,7 +133,7 @@ int32_t main(int32_t argc, const char* argv[])
 	(void)argc;
 	(void)argv;
 
-	mlx_set_setting(MLX_MAXIMIZED, true);
+	//mlx_set_setting(MLX_MAXIMIZED, true);
 
 	// Gotta error check this stuff
 	if (!(mlx = mlx_init(WIDTH, HEIGHT, "Dolphinstein 2D", true)))
@@ -146,8 +171,13 @@ int32_t main(int32_t argc, const char* argv[])
 	mlx_loop_hook(mlx, ft_hook, mlx);
 	mlx_loop_hook(mlx, ft_animate, mlx);
 
-	read_map(mlx, dolph_img0);
+	map = read_map(mlx, dolph_img0);
 	
+	//if (!(dolph_loc = (t_vect *)malloc(sizeof(t_list))))
+		//ft_error();
+	//dolph_loc->x = dolph_img0
+	
+
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);

@@ -9,8 +9,14 @@
 
 #define WIDTH 512
 #define HEIGHT 512
-
-void	read_map(mlx_t *mlx, mlx_image_t *dolph);
+/* 
+typedef struct s_vect
+{
+	int				x;
+	int				y;
+}					t_vect;
+ */
+char	*read_map(mlx_t *mlx, mlx_image_t *dolph);
 int	check_map(char *map);
 
 void ft_error(void);
