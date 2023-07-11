@@ -15,9 +15,18 @@ typedef struct s_vect
 	int				x;
 	int				y;
 }					t_vect;
- */
+
+typedef struct s_fish_lst
+{
+	int				loc[2];
+
+	struct s_fish_lst	*next;
+	struct s_fish_lst	*prev;
+}					t_fish_lst;
+*/
 char	*read_map(mlx_t *mlx, mlx_image_t *dolph);
 int	check_map(char *map);
+void	collect_fish(int loc, char *map);
 
 void ft_error(void);
 

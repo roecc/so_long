@@ -30,6 +30,7 @@ void ft_hook(void* param)
 		mlx_close_window(mlx);
 }
 
+
 void	ft_move(mlx_t *mlx, mlx_image_t *dolph)
 {
 	int	dist = 64;
@@ -37,6 +38,7 @@ void	ft_move(mlx_t *mlx, mlx_image_t *dolph)
 	//lst = (t_list *)malloc(sizeof(t_list));
 	int	pos[2];
 	int	len;
+	int	target;
 
 	len = 14;
 
@@ -50,10 +52,13 @@ void	ft_move(mlx_t *mlx, mlx_image_t *dolph)
 		if (pressed != 1)
 		{
 			pressed = 1;
-			if (map[pos[0] + (pos[1] + 1) * len] != '1')
+			target = pos[0] + (pos[1] + 1) * len;
+			if (map[target] != '1')
 				dolph->instances[0].y += dist;
 			else
 				ft_printf("\nWALL\n");
+			if (map[target] == 'C')
+				collect_fish(target, map);
 		}
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_UP))
@@ -61,10 +66,13 @@ void	ft_move(mlx_t *mlx, mlx_image_t *dolph)
 		if (pressed != 1)
 		{
 			pressed = 1;
-			if (map[pos[0] + (pos[1] - 1) * len] != '1')
+			target = pos[0] + (pos[1] - 1) * len;
+			if (map[target] != '1')
 				dolph->instances[0].y -= dist;
 			else
 				ft_printf("\nWALL\n");
+			if (map[target] == 'C')
+				collect_fish(target, map);
 		}
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
@@ -72,10 +80,13 @@ void	ft_move(mlx_t *mlx, mlx_image_t *dolph)
 		if (pressed != 1)
 		{
 			pressed = 1;
-			if (map[pos[0] - 1 + (pos[1]) * len] != '1')
+			target = pos[0] - 1 + (pos[1]) * len;
+			if (map[target] != '1')
 				dolph->instances[0].x -= dist;
 			else
 				ft_printf("\nWALL\n");
+			if (map[target] == 'C')
+				collect_fish(target, map);
 		}
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
@@ -83,10 +94,13 @@ void	ft_move(mlx_t *mlx, mlx_image_t *dolph)
 		if (pressed != 1)
 		{
 			pressed = 1;
-			if (map[pos[0] + 1 + (pos[1]) * len] != '1')
+			target = pos[0] + 1 + (pos[1]) * len;
+			if (map[target] != '1')
 				dolph->instances[0].x += dist;
 			else
 				ft_printf("\nWALL");
+			if (map[target] == 'C')
+				collect_fish(target, map);
 		}
 	}
 	else if (pressed)
@@ -177,6 +191,9 @@ int32_t main(int32_t argc, const char* argv[])
 		//ft_error();
 	//dolph_loc->x = dolph_img0
 	
+	//mlx_texture_t* font = mlx_get_font();
+	//mlx_image_t* text = mlx_texture_to_image(mlx, font);
+	//wall->instance
 
 	mlx_loop(mlx);
 	mlx_terminate(mlx);

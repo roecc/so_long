@@ -1,5 +1,7 @@
 #include "so_long.h"
 
+mlx_image_t* fish;
+
 char	*read_map(mlx_t *mlx, mlx_image_t *dolph)
 {
 	int		fd;
@@ -25,11 +27,12 @@ char	*read_map(mlx_t *mlx, mlx_image_t *dolph)
 	mlx_texture_t*  fish_tex = mlx_load_png("./assets/fish.png");
 	if (!fish_tex)
 		ft_error();
-	mlx_image_t* fish = mlx_texture_to_image(mlx, fish_tex);
+	//mlx_image_t* fish = mlx_texture_to_image(mlx, fish_tex);
+	fish = mlx_texture_to_image(mlx, fish_tex);
 	if (!fish)
 		ft_error();
 
-	fd = open("map0.ber", O_RDONLY);
+	fd = open("map2.ber", O_RDONLY);
 	/* line = get_next_line(fd);
 	ft_printf("%s", line);
 	len = ft_strlen(line); */
@@ -62,6 +65,8 @@ char	*read_map(mlx_t *mlx, mlx_image_t *dolph)
 		}
 		y++;
 
+
+		wall->instances[2].y = -100;
 		if (!(map = str_join(map, line)))
 			return(NULL);
 	}
@@ -99,4 +104,48 @@ int	check_map(char *map)
 	}
 	return (1);
 	//if (x%width == 0 || x%width)
+}
+
+int	find_fish(int loc, char *map)
+{
+	int	i;
+	int	nf;
+
+	i = -1;
+	nf = 0;
+	while (++i < loc)
+		if (map[i] == 'C')
+			nf++;
+	return (nf);
+}
+
+int	found_all(char *map)
+{
+	int	i;
+
+	i = -1;
+	while (map[++i])
+		if (map[i] == 'C')
+			if (fish->instances[find_fish(i, map)].x != -256)
+				return (0);
+	return (1);
+}
+
+void	collect_fish(int loc, char *map)
+{
+	int	fn;
+
+	fn = find_fish(loc, map);
+	if (fish->instances[fn].x != -256)
+	{
+		fish->instances[find_fish(loc, map)].x = -256;
+		fish->instances[find_fish(loc, map)].y = -256;
+		ft_printf("FOUND FISH\n");
+		if (found_all(map))
+			ft_printf("\nFOUND ALL\n");
+		else
+			ft_printf("\nNOT ALL\n");
+	}
+	else
+		ft_printf("FOUND ALREADY");
 }
